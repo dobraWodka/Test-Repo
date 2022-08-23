@@ -1,0 +1,13 @@
+<template>
+    <a href="#" onclick={selectHandler}>
+        <lightning-layout vertical-align="center">
+            <lightning-layout-item>
+                <lightning-icon icon-name="standard:contact" alternative-text="Contact" title="Contact"></lightning-icon>
+                <!-- <lightning-button label="Get Contacts" onclick={clickHandler}></lightning-button> -->
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <p>{contact.Name}</p>
+            </lightning-layout-item>
+        </lightning-layout>
+    </a>
+</template>

@@ -1,0 +1,50 @@
+<template>
+  
+    <lightning-card>
+        <div>
+            <h2 class="slds-text-heading_medium slds-m-left_medium">Enter Account Name</h2>
+            <lightning-layout   vertical-align="end">    
+                    <lightning-layout-item flexibility="auto" padding="around-small">
+                        <lightning-input type="search" minlength="3" maxlength="10" label="Enter Account Name"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small">
+                        <div class="slds-grid_vertical-align-end">
+                            <lightning-button label="Search" onclick={handleSearch}></lightning-button>
+                        </div>
+                    </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout class="slds-m-around_medium">
+                <lightning-layout-item>
+                    <lightning-input type="checkbox" data-id="checkbox" label="With email"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-input type="checkbox" data-id="checkbox" label="With connected contacts"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-input type="checkbox" data-id="checkbox" id="active" label="Only Active Accounts"></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <template if:true={noMatchesFound}>
+            <div class="nothing-found">
+                <lightning-card title="Nothing found">
+                    <p class="slds-m-around_medium">{noMatchesFoundMessage}</p>
+                </lightning-card>
+            </div>
+        </template>
+       <template if:false={noMatchesFound}>
+        <div class="slds-grid slds-gutters slds-wrap "> 
+            <template for:each={accounts} for:item="acc">
+                <div class="slds-size_1-of-3 slds-m-left_medium" key={acc.Id}>
+                <lightning-card class="zalupa" variant="Narrow" title={acc.Name} icon-name="standard:account">
+                    <p class="slds-p-horizontal_small">Industry: {acc.Industry}</p>
+                    <p class="slds-p-horizontal_small">Rating: {acc.Rating}</p>
+                    <p class="slds-p-horizontal_small">Website: {acc.Website}</p>
+                    <p class="slds-p-horizontal_small">Revenue: {acc.AnnualRevenue}</p>
+                </lightning-card>
+                </div>
+            </template>
+        </div>
+       </template>
+    </lightning-card>
+</template>

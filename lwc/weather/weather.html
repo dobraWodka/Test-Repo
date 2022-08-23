@@ -1,0 +1,55 @@
+<template>
+    <lightning-card title="Weather">
+        <lightning-input class="slds-m-horizontal_small" type="text" label="Enter location" value="London" min-length="3" required></lightning-input>
+        <lightning-card title={cardTitle} variant="narrow" icon-name="custom:custom3">
+        <lightning-button label="Show Weather" variant="brand" onclick={obtainWeather} slot="actions"></lightning-button>
+        <template if:true={showWeather}>
+            <lightning-layout>
+                <lightning-layout-item size="6">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-left_small">
+                        <lightning-icon 
+                        icon-name="utility:event" 
+                        alternative-text="Date"
+                        title="Date"
+                        size="small"></lightning-icon>
+                        <p><lightning-formatted-date-time value={localDate} class="text slds-m-left_small"></lightning-formatted-date-time></p>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="6">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-left_small">
+                        <lightning-icon 
+                        icon-name="utility:clock"
+                        alternative-text="Clock"
+                        title="Clock"
+                        size="small"></lightning-icon>
+                        <p class="text slds-m-left_small">{localTime}</p>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout horizontal-align="space" >
+                <lightning-layout-item size="5" padding="around-small" class=" text slds-text-align_center" >
+                    <img src={img} alt={condition} >
+                    <p>{temp}</p>
+                    <p>{condition}</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" class="slds-m-around_small text">
+                    <p>Wind: </p>
+                    <p>Pressure: </p>
+                    <p>Humidity: </p>
+                </lightning-layout-item>
+                <lightning-layout-item size="4" class="slds-m-around_small text">
+                    <p>{wind} Km/H</p>
+                    <p>{pressure} mB</p>
+                    <p>{humidity} %</p>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={showWeather}>
+            <div class="slds-text-align_center">
+                <img src={nothingFoundImg} alt=" " style="width:150px; height:150px; opacity: 0.7;">
+                <p class="text">{noCityFound}</p>
+            </div>
+        </template>
+        </lightning-card>
+    </lightning-card>
+</template>

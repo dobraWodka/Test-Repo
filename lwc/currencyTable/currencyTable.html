@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Exchange Rate to USD">
+        <lightning-button label="Refresh" variand="brand" title="Get new data" onclick={handleClick} class=""></lightning-button>
+        <div>
+            <lightning-datatable
+                    key-field="id"
+                    data={data}
+                    columns={columns}
+                    hide-checkbox-column
+                    errors={}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title="Opportunity" icon-name="standard:opportunity">
+        <lightning-layout class="slds-p-around_small">
+            <lightning-layout-item flexibility="auto">
+                <template if:true={listNotEmpty}>
+                    <template for:each={opps.data} for:item="opp">
+                        <c-opp-child key={opp.Id} opportunity={opp} onselectedopp={oppSelected}></c-opp-child>
+                    </template>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="no-shrink">
+                <div class="slds-card_boundary slds-text-align_left slds-m-top_small">
+                <template if:true={selectedOpp}>
+                    <!-- <div class="slds-card_boundary"> -->
+                        <lightning-card  class="slds-p-top_small ">
+                                <h1 slot="title" class="slds-text-heading_large slds-text-align_center">{selectedOpp.Name}</h1>
+                            <div class="slds-p-around_small slds-text-heading_medium slds-grid">
+                                <div class="slds-col">
+                                    <p>Stage: </p>
+                                    <p>Account: </p>
+                                    <p>Close Date: </p>
+                                </div>
+                                <div class="slds-col slds-m-left_small" style="font-weight:bold">
+                                    <p>{selectedOpp.StageName}</p>
+                                    <p>{selectedOpp.Account.Name}</p>
+                                    <p><lightning-formatted-date-time value={selectedOpp.CloseDate}></lightning-formatted-date-time></p>
+                                </div>
+                            </div>
+                            <div class="slds-p-horizontal_x-small" slot="footer">
+                                <p class=" slds-text-heading_medium" slot="footer">Amount:</p>
+                                <p slot="footer"><lightning-formatted-number 
+                                class="slds-text-heading_medium "
+                                style="font-weight: bold"
+                                value={selectedOpp.Amount} 
+                                format-style="currency"
+                                currency-code="EUR"
+                                currency-display-as="symbol"></lightning-formatted-number>
+                                </p>
+                            </div>
+                        </lightning-card>
+                        </template>
+                    </div>
+                    <div>
+                        <template for:each={relatedProducts} for:item="product">
+                            <c-opp-product product={product} key={product.Id}></c-opp-product>
+                        </template>
+                    </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>
